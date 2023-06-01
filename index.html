@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+  <body>
+
+    <head>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap" rel="stylesheet">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <style>
+        .card {
+          box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.7);
+          transition: 0.3s;
+          width: 300px;
+          border-radius: 10px;
+        }
+
+        .card:hover {
+          box-shadow: 8.0px 18.0px 18.0px rgba(0, 0, 0, 0.7);
+          transition-timing-function: ease-in-out;
+          cursor: pointer;
+          transform: scale(1.05);
+        }
+
+        .card:hover::before {
+          transform: scaleX(1);
+          transform-origin: right;
+        }
+
+        .card::before {
+          transform: scaleX(0);
+          transform-origin: left;
+          transition: transform 0.5s ease-in-out;
+
+        }
+
+        img {
+          border-radius: 5px 5px 0 0;
+        }
+
+        body {
+          font-family: "Roboto", serif;
+          margin: 0px;
+          padding: 0px;
+          height: 100%;
+          overflow: hidden;
+        }
+
+        .container {
+          padding: 2px 16px;
+          text-align: center;
+        }
+
+        nav {
+          position: fixed;
+          background: red;
+          top: 0;
+          width: 100%;
+        }
+
+        iframe {
+          margin: 0;
+          padding: 0;
+          border: none;
+          width: 100%;
+          height: 300px;
+        }
+
+        html {
+          height: 100%;
+          overflow: hidden;
+        }
+
+        .thumbnail-container {
+          width: calc(1440px * 0.25);
+          height: calc(900px * 0.25);
+          display: inline-block;
+          overflow: hidden;
+          position: relative;
+        }
+
+        .thumbnail:after {
+          content: "";
+          display: block;
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+        }
+
+      </style>
+    </head>
+    <div class="card" id="myDiv">
+    <div class="thumbnail-container"> <div class="thumbnail"> <iframe src="" id="urmom" style="border-radius: 5px 5px 0 0; width:300px; box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.7);"></iframe> </div> </div>
+      <div class="container" id="p1">
+        <div id="p2">
+          <h2 id="red"><b></b></h2>
+          <h4 id="red2"></h4>
+        </div>
+      </div>
+    </div>
+    <script>
+      var gamename = prompt("What's the games name?");
+      var sign = prompt();
+      var gamedesc = prompt("What's your description of the game in a small sentence?");
+      
+      var url = prompt("Game url C V it:");
+      //var profession = prompt("What's your job?");
+
+      const myObject = {
+        gamename: gamename,
+        gamedesc: gamedesc,
+        url: url,
+        //profession: profession
+      }
+
+      window.localStorage.setItem("myObject", JSON.stringify(myObject));
+
+      let newObject = window.localStorage.getItem("myObject");
+      console.log(JSON.parse(newObject));
+
+      var obj = JSON.parse(newObject);
+      // Creating "h2" element
+      var H = document.createElement("h2");
+      // Retaining id  
+      H.setAttribute("id", "red");
+      // Creating Text node        
+      var txt = document.createTextNode(obj.gamename);
+      // Accessing  the Element we want to replace 
+      var repNode = document.getElementById("p1");
+      // Appending Text Node in Element  
+      H.appendChild(txt);
+      // Replacing one element with another
+      p1.replaceChild(H, p1.childNodes[0]);
+      // Creating "h2" element
+      var H4 = document.createElement("h4");
+      // Retaining id  
+      H4.setAttribute("id", "red2");
+      // Creating Text node        
+      var txt2 = document.createTextNode(obj.gamedesc);
+      // Accessing  the Element we want to replace 
+      var repNode2 = document.getElementById("p2");
+      // Appending Text Node in Element  
+      H4.appendChild(txt2);
+      // Replacing one element with another
+      p2.replaceChild(H4, p2.childNodes[0]);
+
+      element = document.getElementById("myDiv")
+      element.addEventListener("click", myFunction);
+
+      function myFunction2() {
+        var x = document.getElementById("myDiv");
+        if (x.style.display === "none") {
+          x.style.display = "block";
+        } else {
+          x.style.display = "none";
+        }
+      }
+
+      function myFunction() {
+        const iframe = document.createElement("iframe");
+        iframe.src = obj.url;
+        document.body.appendChild(iframe);
+        iframe.setAttribute('id', 'myiFrame');
+        myFunction2()
+      }
+ 
+      document.getElementById('urmom').src = url;
+
+    </script>
+  </body>
+
+</html>
